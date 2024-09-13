@@ -1,0 +1,22 @@
+name: RadiantWarp
+version: '${project.version}'
+main: me.thecatisbest.radiantwarp.RadiantWarp
+api-version: 1.13
+commands:
+  warp:
+    description: Show list of warp, or warp to or warp other people to a warp.
+    usage: /<command> <warp> || /<command> <player> <warp>
+  listwarps:
+    description: Show list of warp, or warp to or warp other people to a warp.
+    usage: /<command> <page>
+    aliases: [warpslist]
+  setwarp:
+    description: Set a warp at your location.
+    usage: /<command> <warp>
+  delwarp:
+    description: Delete warp by name.
+    usage: /<command> <warp>
+  radiantwarp:
+    description: General EasyWarp commands.
+    usage: /<command> <help | reload>
+    aliases: [rwarp]

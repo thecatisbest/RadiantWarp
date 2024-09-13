@@ -1,0 +1,72 @@
+# Radiant Configuration
+
+# Name displayed in messages sent to player from plugin.
+# ex. [server-name] You have been warped.
+server-name: "&8[&c系統&8] "
+
+# Delay (in seconds) before a person is warped. (0 for no delay)
+warp-delay: 0
+
+# Delay (in seconds) before a person can warp again. (0 for no delay)
+warp-cooldown: 0
+
+# If enabled, displays a countdown when waiting to warp.
+display-countdown: false
+
+
+#Variables: {server}, {delay}, {name}, {display}, {node}, {command}, {page}, {pages}, {target}
+messages:
+  warp:
+    other: "{server}&6你已將 &c{target} &6傳送至 &c{warp}."
+    cancelled: "&c傳送延遲已取消!"
+    completed: "{server}&6你已被傳送至 &c{warp}."
+    delayed: "{server}&6你將在 &c{delay} &6秒後傳送."
+    removed: "{server}&6公共傳送點 &c{warp} &6刪除成功"
+    set:
+      - "{server}&e正在更新公共傳送點..."
+      - "{server}&a公共傳送點 &a⌈ &c{warp} &a⌋ &a更新成功"
+    list: "&6可用的公共傳送點 &c({page}/{pages})"
+    countdown: "{server}&6你將在 &c{time} &6秒後被傳送."
+    cooldown: "{server}&c你必須等待 &e{time} &c後才能再次傳送."
+    no-permission: "{server}&c你沒有權限這麽做!"
+  error:
+    illegal-char: "&c錯誤: 你的公共傳送點名稱包含無效字符."
+    no-warp: "{server} &c找不到公共傳送點"
+    no-warp-given: "&c使用參數: /warp <傳送點>"
+    no-permission: "&c你沒有權限這麽做!"
+    no-page: "&c使用參數: /{command} <頁碼 #>"
+    no-player: "&c錯誤: 找不到玩家."
+    not-player: "&c錯誤: 你必須是玩家才能執行此操作."
+    cannot-overwrite: "&c錯誤: 傳送點已經存在，無法覆蓋."
+  config:
+    reloaded: "{server}&a配置已重新加載!"
+
+#If set to true, players need permission or OP to use the /warp command
+warp-requires-permissions: false
+
+#If set to true, players need permission or OP to use the /listwarps command
+listwarps-requires-permissions: true
+
+#If set to true, players need permission or OP to use the /setwarp command
+setwarp-requires-permissions: true
+
+#If set to true, players need permission or OP to use the /delwarp command
+delwarp-requires-permissions: true
+
+#If set to true, players need permission or OP to use the /warp command on others
+warp-others-requires-permissions: true
+
+# If set to true, a person needs permissions for 'radiantwarp.warp.<warpname>' to use a warp or 'radiantwarp.warp.*' to use all warps.
+per-warp-permissions: false
+
+# If set to true, a person bypasses any warp delay if they have permissions for 'radiantwarp.delay.bypass'
+permissions-bypass-delay: false
+
+# If set to true, a person bypasses any warp delay if they are ops.
+ops-bypass-delay: false
+
+# If set to true, when warping another player (/warp player warp) the player will bypass the delay
+warp-other-bypass-delay: true
+
+# If set to false, you will receive an error when trying to /setwarp an existing warp
+allow-warp-overwrite: true
