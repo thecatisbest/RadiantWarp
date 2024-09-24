@@ -1,7 +1,7 @@
 package me.thecatisbest.radiantwarp.objects;
 
-import me.thecatisbest.radiantwarp.Utils.Settings;
-import me.thecatisbest.radiantwarp.Utils.Utils;
+import me.thecatisbest.radiantwarp.utils.Settings;
+import me.thecatisbest.radiantwarp.utils.Utils;
 import me.thecatisbest.radiantwarp.managers.CooldownManager;
 import org.bukkit.entity.Player;
 

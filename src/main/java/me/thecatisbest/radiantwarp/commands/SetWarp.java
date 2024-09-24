@@ -1,8 +1,8 @@
 package me.thecatisbest.radiantwarp.commands;
 
 import me.thecatisbest.radiantwarp.RadiantWarp;
-import me.thecatisbest.radiantwarp.Utils.Settings;
-import me.thecatisbest.radiantwarp.Utils.Utils;
+import me.thecatisbest.radiantwarp.utils.Settings;
+import me.thecatisbest.radiantwarp.utils.Utils;
 import me.thecatisbest.radiantwarp.managers.WarpManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -69,7 +69,7 @@ public class SetWarp implements CommandExecutor {
 
             // Ensure the number part is valid (no leading zeros and within the limit)
             String numberPart = warpName.substring(warpName.lastIndexOf('_') + 1);
-            if (!VALID_NUMBER_PATTERN.matcher(numberPart).matches() || !isWithinLimit(player, Integer.parseInt(numberPart))) {
+            if (!VALID_NUMBER_PATTERN.matcher(numberPart).matches() || !WarpManager.isWithinLimit(player, Integer.parseInt(numberPart))) {
 
                 player.sendMessage(Utils.color("&c無效的數字! 確保無前導零且在你的許可範圍內。"));
                 return false;
@@ -89,25 +89,5 @@ public class SetWarp implements CommandExecutor {
         }
 
         return true;
-    }
-
-    private String getNextAvailableWarpName(String playerName) {
-        int count = 1;
-        String warpName;
-        do {
-            warpName = playerName + "_" + count;
-            count++;
-        } while (WarpManager.isWarp(warpName));
-        return warpName;
-    }
-
-    private boolean isWithinLimit(Player player, int warpNumber) {
-        // 從大到小檢查，找出玩家的最大許可權限
-        for (int i = warpNumber; i > 0; i--) {
-            if (player.hasPermission("radiantwarp.limit." + i)) {
-                return warpNumber <= i; // 如果 warpNumber 小於等於該上限，則允許創建
-            }
-        }
-        return false;
     }
 }

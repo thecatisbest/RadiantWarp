@@ -1,4 +1,4 @@
-package me.thecatisbest.radiantwarp.Utils;
+package me.thecatisbest.radiantwarp.utils;
 
 import me.thecatisbest.radiantwarp.RadiantWarp;
 import org.bukkit.plugin.Plugin;
@@ -20,6 +20,10 @@ public class Settings {
     public static boolean deleteWarpRequiresPerms = true;
     public static boolean warpOtherRequiresPerms = true;
     public static boolean displayCountdown = false;
+    public static boolean signsReqPerms = false;
+    public static boolean signsPerWarpPerms = false;
+    public static boolean signsBypassDelay = false;
+    public static boolean signsBypassCooldown = false;
 
     public static String prefix = "&b傳送系統&f>> ";
 
@@ -43,6 +47,10 @@ public class Settings {
             Settings.opsBypassDelay = plugin.getConfig().getBoolean("ops-bypass-delay");
             Settings.warpOtherBypassDelay = plugin.getConfig().getBoolean("warp-other-bypass-delay");
             Settings.canOverwrite = plugin.getConfig().getBoolean("allow-warp-overwrite");
+            Settings.signsReqPerms = plugin.getConfig().getBoolean("signs-require-permissions");
+            Settings.signsPerWarpPerms = plugin.getConfig().getBoolean("signs-per-warp-permissions");
+            Settings.signsBypassDelay = plugin.getConfig().getBoolean("signs-bypass-delay");
+            Settings.signsBypassCooldown = plugin.getConfig().getBoolean("signs-bypass-cooldown");
 
         } catch (Exception e) {
             plugin.getLogger().log(Level.SEVERE, "Error loading config: disabling.");

@@ -1,8 +1,8 @@
 package me.thecatisbest.radiantwarp.commands;
 
 import me.thecatisbest.radiantwarp.RadiantWarp;
-import me.thecatisbest.radiantwarp.Utils.Settings;
-import me.thecatisbest.radiantwarp.Utils.Utils;
+import me.thecatisbest.radiantwarp.utils.Settings;
+import me.thecatisbest.radiantwarp.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

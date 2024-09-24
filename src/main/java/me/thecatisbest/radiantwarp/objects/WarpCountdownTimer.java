@@ -1,7 +1,7 @@
 package me.thecatisbest.radiantwarp.objects;
 
-import me.thecatisbest.radiantwarp.Utils.Settings;
-import me.thecatisbest.radiantwarp.Utils.Utils;
+import me.thecatisbest.radiantwarp.utils.Settings;
+import me.thecatisbest.radiantwarp.utils.Utils;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;

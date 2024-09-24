@@ -16,6 +16,9 @@ commands:
   delwarp:
     description: Delete warp by name.
     usage: /<command> <warp>
+  where:
+    description: Open GUI.
+    usage: /<command> <warp>
   radiantwarp:
     description: General EasyWarp commands.
     usage: /<command> <help | reload>

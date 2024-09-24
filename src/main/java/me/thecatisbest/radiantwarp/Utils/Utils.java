@@ -1,4 +1,4 @@
-package me.thecatisbest.radiantwarp.Utils;
+package me.thecatisbest.radiantwarp.utils;
 
 import me.thecatisbest.radiantwarp.RadiantWarp;
 import me.thecatisbest.radiantwarp.managers.CooldownManager;
@@ -121,6 +121,17 @@ public class Utils {
 
         return false;
     }
+
+    public static void warpSign(Player player, Warp to) {
+        if (Settings.delay == 0 || playerBypassesDelays(player) || (Settings.signsBypassDelay)) {
+
+            warp(player, to);
+            return;
+        }
+
+        delayedTeleport(player, to, false);
+    }
+
 
     public static void stopWarping(Player p) {
         if (isWarping(p)) {

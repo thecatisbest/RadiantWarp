@@ -1,7 +1,7 @@
 package me.thecatisbest.radiantwarp.commands;
 
-import me.thecatisbest.radiantwarp.Utils.Settings;
-import me.thecatisbest.radiantwarp.Utils.Utils;
+import me.thecatisbest.radiantwarp.utils.Settings;
+import me.thecatisbest.radiantwarp.utils.Utils;
 import me.thecatisbest.radiantwarp.managers.CooldownManager;
 import me.thecatisbest.radiantwarp.managers.WarpManager;
 import me.thecatisbest.radiantwarp.objects.Warp;
@@ -56,18 +56,23 @@ public class WarpCommand implements CommandExecutor {
                 return true;
             }
         } else {
-            if (!WarpManager.isWarp(warpName)) {
-                HashMap<String, String> values = new HashMap<>();
-                values.put("warp", warpName);
-
-                Utils.sendParsedMessage(sender, Settings.getMessage("error.no-warp"), values);
-                return true;
-            }
-
             if (!(sender instanceof Player)) {
                 HashMap<String, String> values = new HashMap<>();
 
                 Utils.sendParsedMessage(sender, Settings.getMessage("error.not-player"), values);
+                return true;
+            }
+
+            Warp self = WarpManager.getWarp(warpName + "_1");
+            Player player = (Player) sender;
+            if (self != null) {
+                Utils.warpSelf(player, self);
+                return true;
+            } else if (!WarpManager.isWarp(warpName)) {
+                HashMap<String, String> values = new HashMap<>();
+                values.put("warp", warpName);
+
+                Utils.sendParsedMessage(sender, Settings.getMessage("error.no-warp"), values);
                 return true;
             }
 
