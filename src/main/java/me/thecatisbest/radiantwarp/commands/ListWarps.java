@@ -1,5 +1,7 @@
 package me.thecatisbest.radiantwarp.commands;
 
+import me.thecatisbest.radiantwarp.RadiantWarp;
+import me.thecatisbest.radiantwarp.menus.WarpsGUI;
 import me.thecatisbest.radiantwarp.utils.Settings;
 import me.thecatisbest.radiantwarp.utils.Utils;
 import me.thecatisbest.radiantwarp.managers.WarpManager;
@@ -8,6 +10,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 
@@ -25,8 +28,8 @@ public class ListWarps implements CommandExecutor {
             return true;
         }
 
+        /*
         int page = 1;
-
         if (args.length > 0) {
             try {
                 page = Integer.parseInt(args[0]);
@@ -38,6 +41,14 @@ public class ListWarps implements CommandExecutor {
                 return true;
             }
         }
+
+         */
+
+        new WarpsGUI(0, (Player) sender, RadiantWarp.getInstance()).openGUI();
+
+        return true;
+
+        /*
 
         page = Math.min(page, (((WarpManager.getAvailable(sender).size() - 1) / 8) + 1));
         int pages = ((WarpManager.getAvailable(sender).size() - 1) / 8) + 1;
@@ -53,5 +64,7 @@ public class ListWarps implements CommandExecutor {
         }
 
         return true;
+    }
+         */
     }
 }

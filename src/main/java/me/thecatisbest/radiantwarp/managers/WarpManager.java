@@ -4,9 +4,11 @@ import me.thecatisbest.radiantwarp.utils.Settings;
 import me.thecatisbest.radiantwarp.objects.Warp;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -118,6 +120,18 @@ public class WarpManager {
         return ret;
     }
 
+    public static ArrayList<Warp> getPlayerWarps(OfflinePlayer offlinePlayer) {
+        ArrayList<Warp> ret = new ArrayList<>();
+        UUID playerUUID = offlinePlayer.getUniqueId();
+
+        for (Warp warp : warps.values()) {
+            if (warp.getOwner().equals(playerUUID)) {
+                ret.add(warp);
+            }
+        }
+        return ret;
+    }
+
     public static ArrayList<String> getAvailable(CommandSender s) {
         if (!Settings.perWarpPerms || s.hasPermission("radiantwarp.warp.*")) {
             return getWarpNames();
@@ -147,16 +161,13 @@ public class WarpManager {
         return count;
     }
 
-    public static ArrayList<String> getPlayerWarps(Player player) {
-        ArrayList<String> ret = new ArrayList<>();
-        UUID playerUUID = player.getUniqueId();
-
-        for (Warp warp : warps.values()) {
-            if (warp.getOwner().equals(playerUUID)) {
-                ret.add(warp.getName());
-            }
+    public static String getWarpOwnerName(Warp warp) {
+        if (warp == null || warp.getOwner() == null) {
+            return "未知";
         }
-        return ret;
+
+        OfflinePlayer owner = Bukkit.getOfflinePlayer(warp.getOwner());
+        return owner.getName() != null ? owner.getName() : "未知";
     }
 
     private String getNextAvailableWarpName(String playerName) {
