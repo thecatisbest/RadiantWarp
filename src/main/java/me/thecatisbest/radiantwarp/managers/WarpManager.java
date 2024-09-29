@@ -2,14 +2,17 @@ package me.thecatisbest.radiantwarp.managers;
 
 import me.thecatisbest.radiantwarp.utils.Settings;
 import me.thecatisbest.radiantwarp.objects.Warp;
+import me.thecatisbest.radiantwarp.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -18,6 +21,7 @@ import java.util.logging.Level;
 public class WarpManager {
     private static final HashMap<String, Warp> warps = new HashMap<>();
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+
 
     public static String getFormattedCreationDate(Warp warp) {
         return warp.getFormattedCreationDate();
@@ -34,8 +38,23 @@ public class WarpManager {
         return formattedDates;
     }
 
-    public static void addWarp(String name, Location location, Player owner) {
-        addWarp(new Warp(name, location, owner.getUniqueId(), LocalDate.now()));
+    public static LocalDate getWarpDate(String name) {
+        LocalDate creationDate;
+        final FileConfiguration warpConfig;
+        final File warpConfigFile;
+        warpConfigFile = new File(Utils.getPlugin().getDataFolder(), "warps.yml");
+        warpConfig = YamlConfiguration.loadConfiguration(warpConfigFile);
+
+        if (warpConfig.contains("warps." + name + ".date")) {
+            String creationDateString = warpConfig.getString("warps." + name + ".date");
+            creationDate = LocalDate.parse(creationDateString, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+            return creationDate;
+        }
+        return LocalDate.now();
+    }
+
+    public static void addWarp(String name, Location location, Player owner, LocalDate date) {
+        addWarp(new Warp(name, location, owner.getUniqueId(), date));
     }
 
     public static void addWarp(Warp warp) {

@@ -2,7 +2,6 @@ package me.thecatisbest.radiantwarp.objects;
 
 import lombok.Getter;
 import lombok.Setter;
-import me.thecatisbest.radiantwarp.managers.WarpManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -31,7 +30,7 @@ public class Warp {
         setName(n);
         setLocation(l);
         setOwner(owner);
-        setCreationDate(creationDate != null ? creationDate : LocalDate.now());
+        setCreationDate(creationDate);
     }
 
     public Warp (String n, String world, double xx, double yy, double zz, float yyaw, float ppitch, UUID owner, LocalDate creationDate){
@@ -43,7 +42,7 @@ public class Warp {
         yaw = yyaw;
         pitch = ppitch;
         setOwner(owner);
-        setCreationDate(creationDate != null ? creationDate : LocalDate.now());
+        setCreationDate(creationDate);
     }
 
     public void setLocation(Location l) {

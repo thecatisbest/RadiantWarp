@@ -30,7 +30,7 @@ public class WarpsGUI {
         this.main = main;
         this.page = pageNumber;
         this.p = p;
-        this.gui = Bukkit.createInventory(null, 36, Utils.color("&b傳送列表 &8頁數 ") + this.page + 1);
+        this.gui = Bukkit.createInventory(null, 36, Utils.color("&b傳送列表 &8頁數 ") + (this.page + 1));
         addItemsToInventory();
     }
 

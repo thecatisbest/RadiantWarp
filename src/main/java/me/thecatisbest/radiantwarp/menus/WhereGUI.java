@@ -15,9 +15,11 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.metadata.MetadataValue;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class WhereGUI {
     private int page = 0;
@@ -30,13 +32,14 @@ public class WhereGUI {
 
     private OfflinePlayer target;
 
+    private static final String METADATA_KEY = "WhereGUI";
+
     public WhereGUI(int pageNumber, Player p, OfflinePlayer target, RadiantWarp main) {
         this.main = main;
         this.page = pageNumber;
         this.p = p;
         this.target = target;
-        this.gui = Bukkit.createInventory(null, 36, Utils.color("&b傳送列表 &8頁數 ") + this.page + 1);
-        addItemsToInventory();
+        updateInventory();
     }
 
     public Inventory getGUI() {
@@ -47,14 +50,37 @@ public class WhereGUI {
         return this.page;
     }
 
+    private void updateInventory() {
+        this.gui = Bukkit.createInventory(null, 36, Utils.color("&b傳送列表 &8頁數 ") + (this.page + 1));
+        addItemsToInventory();
+    }
+
     public void openGUI() {
+        updateInventory();
         this.p.openInventory(this.gui);
-        this.p.setMetadata("WhereGUI", new FixedMetadataValue(main, this.gui));
+        this.p.setMetadata(METADATA_KEY, new FixedMetadataValue(main, this));
+    }
+
+    public static WhereGUI getFromPlayer(Player player) {
+        List<MetadataValue> metadataList = player.getMetadata(METADATA_KEY);
+        if (!metadataList.isEmpty()) {
+            for (MetadataValue value : metadataList) {
+                if (value.value() instanceof WhereGUI) {
+                    return (WhereGUI) value.value();
+                }
+            }
+        }
+        return null;
+    }
+
+    public void updatePage(int newPage) {
+        this.page = newPage;
+        updateInventory();
     }
 
     private void addItemsToInventory() {
         int slot = 9;
-        if (WarpManager.getWarps().size() - this.page * 27 > 27) {
+        if (WarpManager.getPlayerWarps(target).size() - this.page * 27 > 27) {
             gui.setItem(8, GUIUtils.next(this.page));
         }
 

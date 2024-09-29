@@ -6,7 +6,7 @@
 
   <groupId>me.thecatisbest</groupId>
   <artifactId>RadiantWarp</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>RadiantWarp</name>
@@ -82,6 +82,11 @@
           <artifactId>placeholderapi</artifactId>
           <version>2.11.6</version>
           <scope>provided</scope>
+      </dependency>
+      <dependency>
+          <groupId>net.kyori</groupId>
+          <artifactId>adventure-platform-bukkit</artifactId>
+          <version>4.3.3</version>
       </dependency>
   </dependencies>
 </project>

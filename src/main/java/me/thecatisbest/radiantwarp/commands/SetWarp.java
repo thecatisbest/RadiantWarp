@@ -50,7 +50,7 @@ public class SetWarp implements CommandExecutor {
             return true;
         }
 
-        WarpManager.addWarp(warpName, player.getLocation(), player);
+        WarpManager.addWarp(warpName, player.getLocation(), player, WarpManager.getWarpDate(warpName));
         RadiantWarp.fileManager.saveWarps();
 
         HashMap<String, String> values = new HashMap<>();

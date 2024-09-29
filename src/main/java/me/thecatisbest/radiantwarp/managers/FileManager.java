@@ -73,11 +73,10 @@ public class FileManager {
             }
 
             // 读取并解析创建日期
-            if (warpConfig.contains("warps." + name + ".creationDate")) {
-                String creationDateString = warpConfig.getString("warps." + name + ".creationDate");
+            if (warpConfig.contains("warps." + name + ".date")) {
+                String creationDateString = warpConfig.getString("warps." + name + ".date");
                 creationDate = LocalDate.parse(creationDateString, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
             }
-
 
             Warp warp = new Warp(name, worldName, x, y, z, yaw, pitch, owner, creationDate);
             WarpManager.addWarp(warp);

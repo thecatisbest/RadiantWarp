@@ -1,11 +1,13 @@
 package me.thecatisbest.radiantwarp;
 
 import lombok.Getter;
-import me.thecatisbest.radiantwarp.menus.GUIListener;
+import lombok.NonNull;
+import me.thecatisbest.radiantwarp.listeners.GUIListener;
 import me.thecatisbest.radiantwarp.utils.Settings;
 import me.thecatisbest.radiantwarp.commands.*;
 import me.thecatisbest.radiantwarp.listeners.PlayerListener;
 import me.thecatisbest.radiantwarp.managers.FileManager;
+import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -13,6 +15,7 @@ public final class RadiantWarp extends JavaPlugin {
 
     @Getter private static RadiantWarp instance;
     public static FileManager fileManager;
+    private BukkitAudiences adventure;
 
     @Override
     public void onEnable() {
@@ -24,6 +27,7 @@ public final class RadiantWarp extends JavaPlugin {
         Settings.load(this);
         fileManager = new FileManager();
         fileManager.loadWarps();
+        this.adventure = BukkitAudiences.create(this);
 
         getServer().getPluginManager().registerEvents(new PlayerListener(), this);
         getServer().getPluginManager().registerEvents(new GUIListener(), this);
@@ -46,5 +50,12 @@ public final class RadiantWarp extends JavaPlugin {
     public void onDisable() {
         // Plugin shutdown logic
         fileManager.saveWarps();
+    }
+
+    public @NonNull BukkitAudiences adventure() {
+        if(this.adventure == null) {
+            throw new IllegalStateException("Tried to access Adventure when the plugin was disabled!");
+        }
+        return this.adventure;
     }
 }

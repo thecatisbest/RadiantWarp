@@ -12,7 +12,7 @@ import java.util.Arrays;
 public class GUIUtils {
 
     public static ItemStack next(int currentIndex) {
-        ItemStack next = new ItemStack(Material.PAPER, 1);
+        ItemStack next = new ItemStack(Material.BOOK, 1);
         ItemMeta target_next = next.getItemMeta();
         target_next.setDisplayName(Utils.color("&a下一頁"));
         target_next.setLore(Utils.color(Arrays.asList(
@@ -26,7 +26,7 @@ public class GUIUtils {
     }
 
     public static ItemStack previous(int currentIndex) {
-        ItemStack previous = new ItemStack(Material.PAPER, 1);
+        ItemStack previous = new ItemStack(Material.BOOK, 1);
         ItemMeta target_previous = previous.getItemMeta();
         target_previous.setDisplayName(Utils.color("&a上一頁"));
         target_previous.setLore(Utils.color(Arrays.asList(
@@ -34,7 +34,7 @@ public class GUIUtils {
                 "&e查看上一頁",
                 "")));
         target_previous.getPersistentDataContainer().set(new NamespacedKey(RadiantWarp.getInstance(), "RadiantWarp.Index"), PersistentDataType.INTEGER,
-                Integer.valueOf(currentIndex + 1));
+                Integer.valueOf(currentIndex - 1));
         previous.setItemMeta(target_previous);
         return previous;
     }
@@ -42,7 +42,7 @@ public class GUIUtils {
     public static int getDestPageIndex(ItemStack stack) {
         if (!stack.getItemMeta().getPersistentDataContainer().has(new NamespacedKey(RadiantWarp.getInstance(), "RadiantWarp.Index"), PersistentDataType.INTEGER))
             return -1;
-        return stack.getItemMeta().getPersistentDataContainer().get(new NamespacedKey(RadiantWarp.getInstance(), "RadiantWarp.Index"),
-                PersistentDataType.INTEGER).intValue();
+        return (stack.getItemMeta().getPersistentDataContainer().get(new NamespacedKey(RadiantWarp.getInstance(), "RadiantWarp.Index"),
+                PersistentDataType.INTEGER)).intValue();
     }
 }
